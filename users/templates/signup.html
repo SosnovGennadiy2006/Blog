@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/forms.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form-box">
+            <span class="box-name">Sign up your account</span>
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color: grey">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+                <input class="submit_btn" type="submit" value="Sign Up">
+            </form>
+            <span>Already have account? <a href="/signIn" class="redirect">Sign in</a></span>
+        </div>
+    </div>
+</body>
+</html>

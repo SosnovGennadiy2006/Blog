@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+:root {
+    --dark-red: #981919;
+    --red: #C42020;
+    --light-red: #E03737;
+    --light-gray: #A5A5A5;
+    --gray: #BEBEBE;
+    --dark-gray: #222222;
+    --white: #EEEEEE;
+}
+
+*,
+*::after,
+*::before
+{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    word-wrap: break-word;
+}
+
+body
+{
+    font-family: -apple-system,BlinkMacSystemFont,
+    Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+}

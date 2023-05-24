@@ -1,0 +1,95 @@
+.footer
+{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 30px 0;
+}
+
+.company_name
+{
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.copyrights
+{
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.icons
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.icons a + a
+{
+    margin-left: 10px;
+}
+
+.footer_icon
+{
+    display: block;
+    min-width: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.github
+{
+    background-image: url(/media/icons/github.svg);
+}
+
+.vk
+{
+    background-image: url(/media/icons/vk.svg);
+}
+
+.footer_content
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.footer_panel
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.footer_panel_name
+{
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.footer-link
+{
+    margin-top: 5px;
+    text-transform: none;
+    text-decoration: none;
+    color: var(--white);
+}

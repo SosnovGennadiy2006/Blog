@@ -1,0 +1,24 @@
+<nav id='menu'>
+    <ul>
+      <li><a class='nav_item' href='/'>Home</a></li>
+      <li><a class='nav_item' href='/about'>About</a></li>
+      <li><a class='nav_item' href='/contact'>Contact Us</a></li>
+      {% if user.is_authenticated %}
+        <li>
+          <a class='nav_item profile_link' href='/profile'>
+            <img class="avatar" src='/media/{{user.profile.avatar}}'>
+            <span>{{user.username}}</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+
+    <div class='registration_buttons_wrapper'>
+        {% if user.is_authenticated %}
+            <a class='registration_btn' href="/logout">Logout</a>
+        {% else %}
+            <a class='registration_btn' href="/signIn">Sign In</a>
+            <a class='registration_btn' href="/signUp">Sign Up</a>
+        {% endif %}
+    </div>
+  </nav>

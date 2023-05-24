@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Update avatar</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/forms.css' %}">
+    <script src="{% static '/js/updateAvatar.js' %}" defer></script>
+    <script type="module" src="{% static '/js/crop.js' %}"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="form-box">
+            <span class="box-name">Update your avatar</span>
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <div class="file_field">
+                    <label for="avatar">Avatar:</label>
+                    <label class="input-file">
+                        <input type="file" name="avatar" accept="image/*" id="id_avatar">
+                        <span>Select file</span>
+                    </label>
+                </div>
+                <div class="image_view">
+                    <div class="ifEmpty">
+                        <span>You have not selected an image</span>
+                    </div>
+                    <div class="result">
+                        <image-crop id="image" src="/media/profile/default.png" rounded loaded>
+                            <input type="hidden" data-image-crop-input="x" name="x">
+                            <input type="hidden" data-image-crop-input="y" name="y">
+                            <input type="hidden" data-image-crop-input="width" name="width">
+                            <input type="hidden" data-image-crop-input="height" name="height">
+                        </image-crop>
+                    </div>
+                </div>
+                <input class="submit_btn" type="submit" value="Update">
+            </form>
+            <a href="/profile" class="redirect">Back to profile</a>
+        </div>
+    </div>
+</body>
+
+</html>
