@@ -81,16 +81,31 @@ html
     margin-top: 10px;
 }
 
+.field label
+{
+    margin-bottom: 5px;
+}
+
 .field input
 {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
-    border: 1px solid var(--dark-gray);
+    border: 1px solid var(--dark-grey);
 }
 
 .field input:focus
 {
+    border: 1px solid var(--red);
+    outline: 3px solid transparent;
+}
+
+.field textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--dark-grey);
+}
+
+.field textarea:focus {
     border: 1px solid var(--red);
     outline: 3px solid transparent;
 }
@@ -187,4 +202,34 @@ html
 {
     color: red;
     padding: 10px 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.author_block
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    color: grey;
+    font-size: 24px;
+}
+
+.author_avatar
+{
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--dark-grey);
+    margin: 0 8px;
+}
+
+.author_name
+{
+    color: var(--dark-grey);
+    font-weight: 600;
 }

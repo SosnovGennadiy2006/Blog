@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Sign In</title>
+    <title>Sign Up</title>
+    <link rel="shortcut icon" href="/media/icons/favicon.ico">
     <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static '/css/forms.css' %}">
 </head>
 <body>
     <div class="wrapper">
         <div class="form-box">
-            <span class="box-name">Sign in to your account</span>
+            <span class="box-name">Sign up your account</span>
             <form action="" method="post" novalidate>
                 {% csrf_token %}
                 {% for field in form %}
@@ -27,13 +28,9 @@
                     </div>
                 {% endfor %}
 
-                {% if form.non_field_errors %}
-                    {{ form.non_field_errors }}
-                {% endif %}
-
-                <input class="submit_btn" type="submit" value="Sign In">
+                <input class="submit_btn" type="submit" value="Sign Up">
             </form>
-            <span>Haven't account? <a href="/signUp" class="redirect">Sign Up</a></span>
+            <span>Already have account? <a href="/signIn" class="redirect">Sign in</a></span>
         </div>
     </div>
 </body>

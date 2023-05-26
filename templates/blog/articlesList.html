@@ -1,0 +1,25 @@
+{% for article in articles %}
+    <div class="article">
+        <div class="article_name">{{article.title}}</div>
+        <div class="author_block">
+            <span>Author:</span>
+            <a href="/profile_{{article.author_id}}/" class="author_link">
+                <img class="author_avatar" src='/media/{{article.author.profile.avatar}}'>
+                <span class="author_name">{{article.author.username}}</span>
+            </a>
+        </div>
+        <hr class="line">
+        <div class="article_body">
+            {{article.description}}
+        </div>
+        <hr class="line">
+        <div class="created_wrapper">
+            <span>Created:</span>
+            <span class="created_date">{{article.time_create}}</span>
+        </div>
+        <div class="view_container">
+            <a href="/article_{{article.id}}/" class="color_link">View</a>
+        </div>
+    </div>
+{% endfor %}
+{% include "blog/pagination.html" with page=articles %}

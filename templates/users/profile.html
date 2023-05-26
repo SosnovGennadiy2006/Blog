@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.username}}</title>
+    <link rel="shortcut icon" href="/media/icons/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/footer.css' %}">
+</head>
+<body>
+    <div class="content_wrapper">
+        {% include "menu.html"  %}
+        <div class="main-content">
+            <p class="welcome">Welcome to profile page, <span class="bold">{{user.username}}</span></p>
+            <div class="info_wrapper">
+                <div class="image_panel">
+                    <div class="avatar-block">
+                        <img class="avatar-big" src='/media/{{user.profile.avatar}}'>
+                        <a class="update_avatar_button" href="/updateAvatar"><span class="edit-icon"></span><span class="button-text">Edit</span></a>
+                    </div>
+                    <a href="/profile" class="username">{{user.username}}</a>
+                    <p>{{user.email}}</p>
+                    <div class="flex">
+                        <button class="update_profile" id="update_profile">Edit profile</button>
+                    </div>
+                </div>
+                <div class="verticalLine"></div>
+                <div class="info_panel" id="info_panel">
+                    <p class="panel_name">User information</p>
+                    <p class="info">
+                        <span class="info-text">First name:</span>
+                        {% if user.profile.first_name %}
+                            <span class="bold">{{user.profile.first_name}}</span>
+                        {% else %}
+                            <span class="red">not specified</span>
+                        {% endif %}
+                    </p>
+                    <p class="info">
+                        <span class="info-text">Last name:</span>
+                        {% if user.profile.last_name %}
+                            <span class="bold">{{user.profile.last_name}}</span>
+                        {% else %}
+                            <span class="red">not specified</span>
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="form_panel" id="form_panel">
+                    <p class="panel_name">Update user information</p>
+                    <form action="" method="post" novalidate>
+                        {% csrf_token %}
+                        {% for field in form %}
+                                <div class="field">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <small style="color: grey">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                        {% endfor %}
+                        <div class="flex">
+                            <input class="submit_btn" type="submit" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <p class="articles_block_name">Your articles</p>
+            <div class="articles">
+                {% if articles %}
+                    {% include "blog/articlesList.html" with articles=articles %}
+                {% else %}
+                    <div class="articles_empty_block">
+                        <p class="articles_empty">There isn't any articles!</p>
+                        <a href="/createArticle/" class="color_link">Create</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% include "footer.html" %}
+    </div>
+
+    <script>
+        var data = JSON.parse("{{data|escapejs}}");
+
+        update_profile_button = document.getElementById('update_profile');
+        form_panel = document.getElementById('form_panel');
+        info_panel = document.getElementById('info_panel');
+
+        form_panel.style.display = 'none';
+
+        update_profile_button.onclick = () => {
+            update_profile_button.style.display = 'none';
+            info_panel.style.display = 'none';
+            form_panel.style.display = 'block';
+        }
+
+        if (data.show)
+        {
+            update_profile_button.style.display = 'none';
+            info_panel.style.display = 'none';
+            form_panel.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

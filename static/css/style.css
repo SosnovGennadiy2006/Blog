@@ -1,0 +1,142 @@
+.main_content
+{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 50px;
+    height: auto;
+    flex-grow: 100;
+}
+
+.link_block
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.articles
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    flex-grow: 100;
+}
+
+.article
+{
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    min-width: 500px;
+    min-height: 400px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+    background: #FFF;
+}
+
+.article + .article
+{
+    margin-top: 30px;
+}
+
+.article_name {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 54px;
+}
+
+.line {
+    margin: 10px 0;
+}
+
+.author_block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    color: grey;
+    font-size: 24px;
+}
+
+.author_avatar {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--dark-grey);
+    margin: 0 8px;
+}
+
+.author_name {
+    color: var(--dark-grey);
+    font-weight: 600;
+}
+
+.article_body {
+    width: 100%;
+    height: auto;
+    flex-grow: 100;
+}
+
+.created_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: grey;
+    font-size: 24px;
+}
+
+.created_date {
+    color: var(--dark-grey);
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.view_container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.step_links
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.step_links .current
+{
+    margin: 0 10px;
+}
+
+.articles_empty
+{
+    font-size: 32px;
+    color: var(--red);
+}

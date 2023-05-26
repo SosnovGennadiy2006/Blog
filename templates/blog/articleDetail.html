@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{article.title}}</title>
+    <link rel="shortcut icon" href="/media/icons/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/articleDetail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/footer.css' %}">
+</head>
+
+<body>
+    <div class="content_wrapper">
+        {% include "menu.html" %}
+        <div class="main_content">
+            <div class="article_wrapper">
+                <div class="article_name">{{article.title}}</div>
+                <div class="author_block">
+                    <span>Author:</span>
+                    <a href="/profile_{{article.author_id}}/" class="author_link">
+                        <img class="author_avatar" src='/media/{{article.author.profile.avatar}}'>
+                        <span class="author_name">{{article.author.username}}</span>
+                    </a>
+                </div>
+                <hr class="line">
+                <div class="article_body">
+                    {{article.body|safe}}
+                </div>
+                <hr class="line">
+                <div class="created_wrapper">
+                    <span>Created:</span>
+                    <span class="created_date">{{article.time_create}}</span>
+                </div>
+            </div>
+        </div>
+        {% include "footer.html" %}
+    </div>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="shortcut icon" href="/media/icons/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/footer.css' %}">
+</head>
+<body>
+    <div class="content_wrapper">
+        {% include "menu.html" %}
+        <div class="main_content">
+            <div class="link_block">
+                {% if user.is_authenticated %}
+                <p class="link_text">You can create new article:</p>
+                <a href="/createArticle/" class="color_link">Create</a>
+                {% else %}
+                <p class="link_text">You must be registered to create articles:</p>
+                <a href="/signUp/" class="color_link">Sign up</a>
+                {% endif %}
+            </div>
+            <div class="articles">
+                {% if articles %}
+                    {% include "blog/articlesList.html" with articles=articles %}
+                {% else %}
+                    <p class="articles_empty">There isn't any articles, but you can create first!</p>
+                {% endif %}
+            </div>
+        </div>
+        {% include "footer.html" %}
+    </div>
+</body>
+</html>

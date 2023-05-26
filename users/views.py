@@ -1,24 +1,20 @@
-from django.contrib.auth import forms 
 from django.shortcuts import render
-from django.contrib import messages 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login,logout
-from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
+
 from .forms import SignUpForm, ProfileChangeForm, AvatarChangeForm
-from django.template import RequestContext
 from json import dumps
-import os
-from django.conf import settings
+from blog.models import Article
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User
 
 def error_404(request, exception):
-        data = {}
-        return render(request,'404.html', data)
+    data = {}
+    return render(request,'404.html', data)
 
 def error_500(request):
-        return render(request,'500.html')
-
-def home(request):
-    return render(request, 'home.html')
+    return render(request,'500.html')
 
 def signIn(request):
     if not request.user.is_authenticated:
@@ -31,14 +27,9 @@ def signIn(request):
                 if user is not None:
                     login(request,user)
                     return HttpResponseRedirect('/home/')
-                else:
-                    print('!!!')
-                    form.add_error('username', 'A user with this username was not found!')
-            else:
-                print(form.errors)
         else:
             form = AuthenticationForm()
-        return render(request,'signin.html',{'form':form})
+        return render(request,'users/signin.html',{'form':form})
     else:
         return HttpResponseRedirect('/home/')
 
@@ -54,7 +45,7 @@ def signUp(request):
             return HttpResponseRedirect('/home/')
     else:
         form = SignUpForm()
-    return render(request,'signup.html',{'form':form})
+    return render(request,'users/signup.html',{'form':form})
 
 def user_logout(request):
     logout(request)
@@ -63,10 +54,26 @@ def user_logout(request):
 def index(rquest):
     return HttpResponseRedirect('/home/')
 
+def getUserPagination(request, user_id):
+    object_list = Article.objects.filter(author_id=user_id)
+    paginator = Paginator(object_list, 5)
+    page = request.GET.get('page')
+    try:  
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        articles = paginator.page(1)
+    except EmptyPage: 
+        page = paginator.num_pages
+        articles = paginator.page(paginator.num_pages)
+    return {'page': page,  
+		   'articles': articles}
+
 def profile(request):
     isShow = False
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/signIn/')
+    p_data = getUserPagination(request, request.user.id)
     if request.method == 'POST':
         form = ProfileChangeForm(request.POST, instance=request.user.profile,
             initial={'first_name': request.user.profile.first_name, 
@@ -80,7 +87,20 @@ def profile(request):
         form = ProfileChangeForm(initial={'first_name': request.user.profile.first_name, 
                      'last_name': request.user.profile.last_name})
     dataJSON = dumps({'show': isShow})
-    return render(request, 'profile.html', {'form': form, 'data': dataJSON})
+    return render(request, 'users/profile.html', {'form': form, 'data': dataJSON, 'page': p_data['page'],
+                                                  'articles': p_data['articles']})
+
+def profileById(request, user_id):
+    if request.user.is_authenticated and request.user.id == user_id:
+        return HttpResponseRedirect('/profile/')
+    user = None
+    try:
+        user = User.objects.get(id=user_id)
+        p_data = getUserPagination(request, user_id)
+        return render(request, 'users/profileById.html', {'user': user, 'page': p_data['page'],
+                                                  'articles': p_data['articles']})
+    except  User.DoesNotExist:
+        raise Http404
 
 def updateAvatar(request):
     if not request.user.is_authenticated:
@@ -92,4 +112,4 @@ def updateAvatar(request):
             return HttpResponseRedirect('/profile/')
     else:
         form = AvatarChangeForm()
-    return render(request, 'updateAvatar.html', {'form': form})
+    return render(request, 'users/updateAvatar.html', {'form': form})

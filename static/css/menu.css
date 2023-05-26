@@ -96,7 +96,7 @@
 #menu ul.sub-menus a:hover
 {
 	background: var(--white);
-	color: var(--dark-gray);
+	color: var(--dark-grey);
 }
 
 
@@ -145,6 +145,6 @@
 	height: 24px;
 	background: #FFF;
 	border-radius: 50%;
-	border: 1px solid var(--dark-gray);
+	border: 1px solid var(--dark-grey);
 	pointer-events: none;
 }

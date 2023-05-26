@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.username}}</title>
+    <link rel="shortcut icon" href="/media/icons/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/footer.css' %}">
+</head>
+
+<body>
+    <div class="content_wrapper">
+        {% include "menu.html" %}
+        <div class="main-content">
+            <p class="welcome">Welcome to <span class="bold">{{user.username}}</span>'s page</p>
+            <div class="info_wrapper">
+                <div class="image_panel">
+                    <div class="avatar-block">
+                        <img class="avatar-big" src='/media/{{user.profile.avatar}}'>
+                    </div>
+                    <a href="/profile_{{user.id}}" class="username">{{user.username}}</a>
+                    <p>{{user.email}}</p>
+                </div>
+                <div class="verticalLine"></div>
+                <div class="info_panel" id="info_panel">
+                    <p class="panel_name">User information</p>
+                    <p class="info">
+                        <span class="info-text">First name:</span>
+                        {% if user.profile.first_name %}
+                            <span class="bold">{{user.profile.first_name}}</span>
+                        {% else %}
+                            <span class="red">not specified</span>
+                        {% endif %}
+                    </p>
+                    <p class="info">
+                        <span class="info-text">Last name:</span>
+                        {% if user.profile.last_name %}
+                            <span class="bold">{{user.profile.last_name}}</span>
+                        {% else %}
+                            <span class="red">not specified</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <p class="articles_block_name">{{user.username}}'s articles</p>
+            <div class="articles">
+                {% if articles %}
+                    {% include "blog/articlesList.html" with articles=articles %}
+                {% else %}
+                <div class="articles_empty_block">
+                    <p class="articles_empty">The {{user.username}} has no articles!</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% include "footer.html" %}
+    </div>
+</body>
+
+</html>

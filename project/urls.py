@@ -6,13 +6,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('signUp/', views.signUp),
-    path('home/', views.home),
-    path('', views.index),
-    path('signIn/', views.signIn),
-    path('logout/', views.user_logout),
-    path('profile/', views.profile),
-    path('updateAvatar/', views.updateAvatar),
+    path('', include('blog.urls')),
+    path('', include('users.urls')),
 ]
 
 if settings.DEBUG:
