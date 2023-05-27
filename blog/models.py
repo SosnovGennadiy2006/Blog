@@ -9,7 +9,7 @@ class Article(models.Model):
         _("Article title"), max_length=250,
         null=False, blank=False
     )
-    description = models.TextField(_("Article title"), max_length=500, null=True, blank=False)
+    description = models.TextField(_("Article description"), max_length=500, null=True, blank=False)
     body = RichTextField(_("Article content"))
     time_create = models.DateTimeField(auto_now_add=True, null=True)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE, default=1)

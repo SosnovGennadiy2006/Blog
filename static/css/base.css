@@ -10,9 +10,9 @@
     --white: #EEEEEE;
 }
 
-*,
-*::after,
-*::before
+*:not(.article_body *),
+*:not(.article_body *)::after,
+*:not(.article_body *)::before
 {
     box-sizing: border-box;
     padding: 0px;
@@ -27,10 +27,10 @@ html
 
 body
 {
-    font-family: -apple-system,BlinkMacSystemFont,
-    Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
     height: 100%;
     background: var(--white);
+    font-family: -apple-system,BlinkMacSystemFont,
+    Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
 }
 
 .content_wrapper
